@@ -35,6 +35,7 @@ def exact_color(input_image, resize, tolerance, zoom):
     
     #resize
     output_width = resize
+    print('samples/'+ input_image)
     img = Image.open('samples/'+input_image)
     if img.size[0] >= resize:
         wpercent = (output_width/float(img.size[0]))
@@ -43,7 +44,7 @@ def exact_color(input_image, resize, tolerance, zoom):
         resize_name = 'samples/resize_'+ input_image
         img.save(resize_name)
     else:
-        resize_name = input_image
+        resize_name = 'samples/'+input_image
     
     #crate dataframe
     img_url = resize_name
@@ -52,6 +53,7 @@ def exact_color(input_image, resize, tolerance, zoom):
     
     #annotate text
     list_color = list(df_color['c_code'])
+    print(list_color)
     list_precent = [int(i) for i in list(df_color['occurence'])]
     text_c = [c + ' ' + str(round(p*100/sum(list_precent),1)) +'%' for c, p in zip(list_color, list_precent)]
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(160,120), dpi = 10)
@@ -91,4 +93,4 @@ def exact_color(input_image, resize, tolerance, zoom):
     plt.tight_layout()
     return plt.show()
 
-exact_color('hp (3).jpg', 900, 12, 2.5)
+exact_color('scuttle.PNG', 900, 12, 2.5)
